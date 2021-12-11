@@ -1,6 +1,6 @@
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
-var playerAttack = 100;
+var playerAttack = 49;
 var playerMoney = 10;
 
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
@@ -8,7 +8,7 @@ var enemyHealth = "50";
 var enemyAttack = 12;
 // create fucntion
 var fight = function(enemyName) {
-    while(enemyHealth > 0) {
+    while(playerHealth > 0 && enemyHealth > 0) {
 
 var promptFight = window.prompt("Would you like to FIGHT or SKP the battle? Enter 'FIGHT' or 'SKIP' to choose.");
     console.log(promptFight);
@@ -26,6 +26,12 @@ console.log (
     // check enemy's health
 if (enemyHealth <= 0) {
     window.alert(enemyName + " had died!");
+
+    // award player money for winning
+    playerMoney = playerMoney + 20;
+
+    // leave while() loop since enemey is dead
+    break;
 }
 else {
     window.alert(enemyName + " still has " + enemyHealth + " health left.");
@@ -39,12 +45,17 @@ playerHealth = playerHealth - enemyAttack;
     // check player's health
 if (playerHealth <= 0) {
     window.alert(playerName + " has died! ");
-} 
+    // leave while () loop id the player is dead
+    break;
+}
+
 else {
     window.alert(playerName + " still has " + playerHealth + " health left. ");
 }
-    //if player choses to skip
-} else if (promptFight === "skip" || promptFight === "SKIP") {
+    //if player choses to "skip" confirm adn stop the loop
+} 
+
+    if (promptFight === "skip" || promptFight === "SKIP") {
     // confirm player wants to skip
     var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
@@ -52,9 +63,8 @@ else {
     if (confirmSkip) {
         window.alert(playerName + " has decided to skip this fight. Goodbye!");
         // subtract money from playerMoney for skipping
-        playerMoney = playerMoney - 2;
-        console.log(confirmSkip);
-        console.log(playerMoney);
+        playerMoney = playerMoney - 10;
+        break;
     }
     // if no (false), ask qustion again by running fight() again
     else {
